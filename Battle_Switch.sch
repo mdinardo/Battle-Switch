@@ -293,6 +293,12 @@ type 0411, grid 15 mm</description>
 <rectangle x1="5.08" y1="-0.381" x2="6.477" y2="0.381" layer="21"/>
 <rectangle x1="-6.477" y1="-0.381" x2="-5.08" y2="0.381" layer="21"/>
 </package>
+<package name="PTH-JUMPER-3-20F3_NC">
+<pad name="P$1" x="-2.54" y="0" drill="1.016" diameter="1.778"/>
+<pad name="P$2" x="0" y="0" drill="1.016" diameter="1.778"/>
+<pad name="P$3" x="2.54" y="0" drill="1.016" diameter="1.778"/>
+<circle x="-1.27" y="0.762" radius="0.254" width="0.127" layer="21"/>
+</package>
 </packages>
 <symbols>
 <symbol name="AZ2100_C">
@@ -430,6 +436,23 @@ type 0411, grid 15 mm</description>
 <pin name="P$2" x="10.16" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
 <text x="0" y="3.048" size="1.27" layer="95" align="bottom-center">&gt;Name</text>
 <text x="0" y="-3.048" size="1.27" layer="96" align="top-center">&gt;Value</text>
+</symbol>
+<symbol name="PTH-JUMPER-3-2OF3-NC_BY_TRACE">
+<wire x1="-2.54" y1="0" x2="-2.54" y2="1.27" width="0.1524" layer="94"/>
+<wire x1="-2.54" y1="2.54" x2="-2.54" y2="1.27" width="0.4064" layer="94"/>
+<wire x1="0" y1="0" x2="0" y2="1.27" width="0.1524" layer="94"/>
+<wire x1="0" y1="2.54" x2="0" y2="1.27" width="0.4064" layer="94"/>
+<wire x1="-3.175" y1="0" x2="0" y2="0" width="0.4064" layer="94"/>
+<wire x1="0" y1="0" x2="0.635" y2="0" width="0.4064" layer="94"/>
+<wire x1="0.635" y1="0" x2="0.635" y2="0.635" width="0.4064" layer="94"/>
+<wire x1="0.635" y1="0.635" x2="-3.175" y2="0.635" width="0.4064" layer="94"/>
+<wire x1="-3.175" y1="0.635" x2="-3.175" y2="0" width="0.4064" layer="94"/>
+<wire x1="2.54" y1="2.54" x2="2.54" y2="1.27" width="0.4064" layer="94"/>
+<text x="-4.064" y="0" size="1.778" layer="95" rot="R90" align="bottom-center">&gt;NAME</text>
+<pin name="1" x="-2.54" y="-2.54" visible="off" length="short" direction="pas" swaplevel="1" rot="R90"/>
+<pin name="2" x="0" y="-2.54" visible="off" length="short" direction="pas" rot="R90"/>
+<pin name="3" x="2.54" y="-2.54" visible="off" length="short" direction="pas" swaplevel="1" rot="R90"/>
+<wire x1="2.54" y1="0" x2="2.54" y2="1.27" width="0.1524" layer="94"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -617,6 +640,23 @@ These are standard reverse protection diodes and small signal diodes. SMA packag
 </device>
 </devices>
 </deviceset>
+<deviceset name="JUMPER-PTH-3-2OF3_NC" prefix="SJ">
+<gates>
+<gate name="G$1" symbol="PTH-JUMPER-3-2OF3-NC_BY_TRACE" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="PTH-JUMPER-3-20F3_NC">
+<connects>
+<connect gate="G$1" pin="1" pad="P$1"/>
+<connect gate="G$1" pin="2" pad="P$2"/>
+<connect gate="G$1" pin="3" pad="P$3"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
 </devicesets>
 </library>
 </libraries>
@@ -649,6 +689,10 @@ These are standard reverse protection diodes and small signal diodes. SMA packag
 <part name="SUPPLY6" library="Battle_Switch" deviceset="VIN" device=""/>
 <part name="R1" library="Battle_Switch" deviceset="RESISTOR" device="" value="10k"/>
 <part name="R2" library="Battle_Switch" deviceset="RESISTOR" device="" value="10k"/>
+<part name="SJ2" library="Battle_Switch" deviceset="JUMPER-PTH-3-2OF3_NC" device=""/>
+<part name="GND5" library="Battle_Switch" deviceset="GND" device=""/>
+<part name="SJ1" library="Battle_Switch" deviceset="JUMPER-PTH-3-2OF3_NC" device=""/>
+<part name="GND6" library="Battle_Switch" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -675,6 +719,10 @@ These are standard reverse protection diodes and small signal diodes. SMA packag
 <instance part="SUPPLY6" gate="G$1" x="-101.6" y="-27.94"/>
 <instance part="R1" gate="G$1" x="-12.7" y="-30.48" rot="MR270"/>
 <instance part="R2" gate="G$1" x="12.7" y="-30.48" rot="R270"/>
+<instance part="SJ2" gate="G$1" x="-144.78" y="-40.64" rot="R270"/>
+<instance part="GND5" gate="G$1" x="-149.86" y="-30.48"/>
+<instance part="SJ1" gate="G$1" x="-144.78" y="-25.4" rot="R270"/>
+<instance part="GND6" gate="G$1" x="-149.86" y="-45.72"/>
 </instances>
 <busses>
 </busses>
@@ -711,6 +759,18 @@ These are standard reverse protection diodes and small signal diodes. SMA packag
 <pinref part="R2" gate="G$1" pin="P$2"/>
 <wire x1="5.08" y1="-40.64" x2="12.7" y2="-40.64" width="0.1524" layer="91"/>
 <junction x="5.08" y="-40.64"/>
+</segment>
+<segment>
+<pinref part="GND5" gate="G$1" pin="GND"/>
+<wire x1="-149.86" y1="-27.94" x2="-149.86" y2="-25.4" width="0.1524" layer="91"/>
+<pinref part="SJ1" gate="G$1" pin="2"/>
+<wire x1="-149.86" y1="-25.4" x2="-147.32" y2="-25.4" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="SJ2" gate="G$1" pin="2"/>
+<wire x1="-147.32" y1="-40.64" x2="-149.86" y2="-40.64" width="0.1524" layer="91"/>
+<wire x1="-149.86" y1="-40.64" x2="-149.86" y2="-43.18" width="0.1524" layer="91"/>
+<pinref part="GND6" gate="G$1" pin="GND"/>
 </segment>
 </net>
 <net name="VIN" class="0">
@@ -838,6 +898,19 @@ These are standard reverse protection diodes and small signal diodes. SMA packag
 <pinref part="IC1" gate="G$1" pin="PB2"/>
 <wire x1="-73.66" y1="-33.02" x2="-71.12" y2="-33.02" width="0.1524" layer="91"/>
 <label x="-71.12" y="-33.02" size="1.016" layer="95" xref="yes"/>
+</segment>
+</net>
+<net name="MODE_SEL" class="0">
+<segment>
+<wire x1="-147.32" y1="-22.86" x2="-149.86" y2="-22.86" width="0.1524" layer="91"/>
+<label x="-149.86" y="-22.86" size="1.016" layer="95" rot="R180" xref="yes"/>
+</segment>
+</net>
+<net name="THRESH_SEL" class="0">
+<segment>
+<pinref part="SJ2" gate="G$1" pin="1"/>
+<wire x1="-147.32" y1="-38.1" x2="-149.86" y2="-38.1" width="0.1524" layer="91"/>
+<label x="-149.86" y="-38.1" size="1.016" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 </nets>
